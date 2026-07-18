@@ -1,0 +1,84 @@
+services:
+  minecraft:
+    image: itzg/minecraft-server:latest
+    container_name: minecraft-java
+
+    ports:
+      - "25565:25565"
+
+    environment:
+      # Obligatorio
+      EULA: "TRUE"
+
+      # Servidor
+      TYPE: "FORGE"
+      VERSION: "26.2"
+      FORGE_VERSION: "65.0.5"
+
+      # Permite cuentas sin validación oficial
+      ONLINE_MODE: "FALSE"
+
+      # Mundo
+      LEVEL: "world"
+      SEED: "5634847558771179357"
+      LEVEL_TYPE: "minecraft:normal"
+      GENERATE_STRUCTURES: "TRUE"
+      SPAWN_PROTECTION: "16"
+
+      # Memoria Java
+      MEMORY: "8G"
+
+      # Información
+      SERVER_NAME: "Servidor Roberto"
+      MOTD: "Servidor Roberto"
+
+      # Modalidad
+      MODE: "survival"
+      DIFFICULTY: "normal"
+      HARDCORE: "FALSE"
+      PVP: "TRUE"
+      FORCE_GAMEMODE: "FALSE"
+
+      # Jugadores
+      MAX_PLAYERS: "20"
+
+      # Se habilitará desde el Makefile después
+      # de agregar al primer usuario.
+      ENABLE_WHITELIST: "FALSE"
+      ENFORCE_WHITELIST: "FALSE"
+
+      # Mundo y rendimiento
+      VIEW_DISTANCE: "10"
+      SIMULATION_DISTANCE: "8"
+      MAX_WORLD_SIZE: "29999984"
+      ALLOW_NETHER: "TRUE"
+      ALLOW_FLIGHT: "TRUE"
+
+      # Comandos
+      ENABLE_COMMAND_BLOCK: "TRUE"
+      BROADCAST_CONSOLE_TO_OPS: "TRUE"
+      BROADCAST_RCON_TO_OPS: "FALSE"
+
+      # Administración mediante RCON
+      ENABLE_RCON: "TRUE"
+      RCON_PASSWORD: "MiClaveMuySegura"
+
+      # Red y rendimiento
+      NETWORK_COMPRESSION_THRESHOLD: "256"
+      MAX_TICK_TIME: "60000"
+      PLAYER_IDLE_TIMEOUT: "0"
+      USE_NATIVE_TRANSPORT: "TRUE"
+
+      # Estado
+      ENABLE_STATUS: "TRUE"
+      HIDE_ONLINE_PLAYERS: "FALSE"
+
+      # Zona horaria
+      TZ: "Asia/Almaty"
+
+    volumes:
+      - ./data:/data
+
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
